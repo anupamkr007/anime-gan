@@ -27,8 +27,8 @@ class Generator(nn.Module):
                 nn.Tanh()
                 )
 
-        def forward(self, input):
-            return self.main(input)
+    def forward(self, input):
+        return self.main(input)
 
 
 
@@ -36,7 +36,7 @@ class Generator(nn.Module):
 
 class Discriminator(nn.Module):
     def __init__(self, ngpu):
-        super(Generator, self).__init__()
+        super(Discriminator, self).__init__()
         self.ngpu = ngpu
         self.main = nn.Sequential(
                 nn.Conv2d(3, 64, 4, 2, 1, bias=False),
@@ -51,12 +51,12 @@ class Discriminator(nn.Module):
                 nn.LeakyReLU(0.2, inplace=True),
 
                 nn.Conv2d(256, 512, 4, 2, 1, bias=False),
-                nn.BatchNorm2d(64),
+                nn.BatchNorm2d(512),
                 nn.LeakyReLU(0.2, inplace=True),
 
                 nn.Conv2d(512, 1, 4, 1, 0, bias=False),
                 nn.Sigmoid()
                 )
 
-        def forward(self, input):
-            return self.main(input)
+    def forward(self, input):
+        return self.main(input)

@@ -1,5 +1,9 @@
 import torch
+from torch.utils.data import Dataset
 from utils import *
+from skimage import io
+from PIL import Image 
+import numpy as np
 
 class AnimeFaceDataset(Dataset):
 
@@ -23,8 +27,8 @@ class AnimeFaceDataset(Dataset):
 
         image = io.imread(img_name)
 
-        sample = {'image': image}
-
+        #sample = {'image': image}
+        sample = Image.fromarray(np.uint8(image))
         if self.transform:
             sample = self.transform(sample)
 
