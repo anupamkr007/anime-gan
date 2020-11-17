@@ -31,6 +31,7 @@ parser.add_argument('--lr', type=float, default=0.0002, help='learning rate for 
 parser.add_argument('--ngpu', type=int, default=1, help='number of GPUs to use')
 parser.add_argument('--outputdir', default='.', help='path to dataset')
 parser.add_argument('--beta1', type=float, default=0.5, help='Beta1 hyperparam for Adam optimizers')
+parser.add_argument('--checkpoints', default='/home/anupam/projects/checkpoints/')
 
 args = parser.parse_args()
 
@@ -133,6 +134,8 @@ for epoch in range(args.num_epoch):
         
         #print('[%s/%s] [%s/%s]'
         #      % ("epoch", "num_epoch", "batch", "length"))
+        if(iters % 1000 == 0):
+            torch.save(netG.state_dict(), args.checkpoints +"iter_" + str(iters)+".pth")
 
         if i % 10 == 0:
             print('[%d/%d] [%d/%d]\tLoss_D: %.4f\tLoss_G: %.4f\tD(x): %.4f\tD(G(z)): %.4f / %.4f'
